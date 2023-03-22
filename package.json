@@ -25,6 +25,7 @@
   "homepage": "https://github.com/briancsparks/mongoq#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
+    "lodash": "^4.17.21",
     "minimist": "^1.2.8",
     "mongodb": "^5.1.0"
   }

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const _ = require('lodash');
 const MongoClient = require('mongodb').MongoClient;
 const utils = require('util');
 const minimist = require('minimist');
@@ -18,7 +19,10 @@ delete prg_args.collection;
 // Load the MongoDB credentials from the .env file
 const username = process.env.MONGO_USERNAME;
 const password = process.env.MONGO_PASSWORD;
-const uri = `mongodb://${username}:${password}@localhost:27017/${db_name}`;
+const creds = _.filter([username, password]).join(':');
+const dest    = _.filter([creds, 'localhost:27017']).join('@');
+const uri = `mongodb://${dest}/${db_name}`;
+// console.log(`Connection string ${uri}`)
 
 // Set up the MongoDB client and connect to the database
 const client = new MongoClient(uri, { useNewUrlParser: true });
@@ -57,6 +61,7 @@ client.connect(err => {
       client.close();
     });
   } else if (command === 'upsert') {
+    console.log(utils.inspect({query, update, options}, { colors: true, depth: null }));
     collection.updateOne(query, update, options, (err, result) => {
       if (err) {
         console.error(err);
