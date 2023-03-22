@@ -3,6 +3,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const utils = require('util');
 const minimist = require('minimist');
+const { SecretsManager } = require('@dopplerhq/doppler-node');
 require('dotenv').config();
 
 // Parse the command line arguments
@@ -15,9 +16,14 @@ delete prg_args._;
 delete prg_args.db;
 delete prg_args.collection;
 
-// Load the MongoDB credentials from the .env file
-const username = process.env.MONGO_USERNAME;
-const password = process.env.MONGO_PASSWORD;
+// Load the MongoDB credentials from Doppler
+const doppler = new SecretsManager({
+  project: process.env.DOPPLER_PROJECT || 'default',
+  config: process.env.DOPPLER_CONFIG || 'default',
+  environment: process.env.DOPPLER_ENVIRONMENT || 'development',
+});
+const username = await doppler.getSecret('mongo_username');
+const password = await doppler.getSecret('mongo_password');
 const uri = `mongodb://${username}:${password}@localhost:27017/${db_name}`;
 
 // Set up the MongoDB client and connect to the database
