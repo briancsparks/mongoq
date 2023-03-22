@@ -1,2 +1,4 @@
+
 # mongoq
-Do MongDB commands from the terminal.
+
+Do MongoDB commands from the terminal.

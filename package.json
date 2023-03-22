@@ -1,0 +1,31 @@
+{
+  "name": "mongoq",
+  "version": "1.0.0",
+  "description": "MongoDB commands in the terminal",
+  "main": "index.js",
+  "bin": {
+    "mongoq": "./bin/mongoq.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/briancsparks/mongoq.git"
+  },
+  "keywords": [
+    "MongoDB",
+    "CLI"
+  ],
+  "author": "Brian C Sparks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/briancsparks/mongoq/issues"
+  },
+  "homepage": "https://github.com/briancsparks/mongoq#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "minimist": "^1.2.8",
+    "mongodb": "^5.1.0"
+  }
+}
