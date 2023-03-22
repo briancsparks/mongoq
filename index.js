@@ -1,2 +1,30 @@
+#!/usr/bin/env node
+const { program } = require('commander');
+const findOne = require('./commands/findOne');
+const updateOne = require('./commands/updateOne');
+const upsert = require('./commands/upsert');
+const remove = require('./commands/remove');
 
-// index.js
+program.version('1.0.0');
+
+program
+  .command('findOne <filter>')
+  .description('Find a single document that matches the given filter')
+  .action(findOne);
+
+program
+  .command('updateOne <filter> <update>')
+  .description('Update a single document that matches the given filter')
+  .action(updateOne);
+
+program
+  .command('upsert <filter> <update>')
+  .description('Update a single document that matches the given filter, or insert a new document if no match is found')
+  .action(upsert);
+
+program
+  .command('remove <filter>')
+  .description('Remove a single document that matches the given filter')
+  .action(remove);
+
+program.parse(process.argv);

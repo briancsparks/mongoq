@@ -1,13 +1,16 @@
 const { MongoClient } = require('mongodb');
 const dotenv = require('dotenv');
+const utils = require("util");
 dotenv.config();
 
 const uri = process.env.MONGODB_URI;
+// console.log(`${uri}`);
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 async function remove(filter) {
   try {
     filter = JSON.parse(filter);
+    console.log(utils.inspect(filter, { colors: true, depth: null }));
 
     await client.connect();
     const database = client.db('testDB');
