@@ -4,6 +4,7 @@ const findOne = require('./commands/findOne');
 const updateOne = require('./commands/updateOne');
 const upsert = require('./commands/upsert');
 const remove = require('./commands/remove');
+const insert = require('./commands/insert');
 
 program.version('1.0.0');
 
@@ -26,5 +27,10 @@ program
   .command('remove <filter>')
   .description('Remove a single document that matches the given filter')
   .action(remove);
+
+program
+  .command('insert <document>')
+  .description('Insert a new document into the collection')
+  .action(insert);
 
 program.parse(process.argv);
